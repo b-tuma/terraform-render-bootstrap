@@ -21,6 +21,12 @@ variable "networking" {
   default     = "flannel"
 }
 
+variable "coredns" {
+  type = bool
+  description = "Enable or disable CoreDNS"
+  default = true
+}
+
 variable "network_mtu" {
   type        = number
   description = "CNI interface MTU (only applies to calico)"

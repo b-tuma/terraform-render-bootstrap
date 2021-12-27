@@ -39,6 +39,18 @@ locals {
     )
     if var.networking == "calico"
   }
+  
+  # CoreDNS manifest
+  coredns_manifest = {
+    for name in fileset("${path.module}/resources/manifests", "**/*.yaml") :
+    "manifests/${name}" => templatefile(
+      "${path.module}/resources/manifests/${name}",
+      {
+        coredns_image = var.container_images["coredns"]
+      }
+    )
+    if var.coredns == true
+  }
 
   # cilium manifests map
   # { manifests-networking/manifest.yaml => content }

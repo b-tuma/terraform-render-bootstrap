@@ -26,7 +26,6 @@ locals {
       "${path.module}/resources/manifests/${name}",
       {
         kube_proxy_image       = var.container_images["kube_proxy"]
-        coredns_image          = var.container_images["coredns"]
         control_plane_replicas = max(2, length(var.etcd_servers))
         pod_cidr               = var.pod_cidr
         cluster_domain_suffix  = var.cluster_domain_suffix
