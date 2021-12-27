@@ -41,10 +41,10 @@ locals {
   }
   
   # CoreDNS manifest
-  coredns_manifest = {
-    for name in fileset("${path.module}/resources/manifests", "**/*.yaml") :
+  coredns_manifests = {
+    for name in fileset("${path.module}/resources/coredns", "*.yaml") :
     "manifests/${name}" => templatefile(
-      "${path.module}/resources/manifests/${name}",
+      "${path.module}/resources/coredns/${name}",
       {
         coredns_image = var.container_images["coredns"]
       }
